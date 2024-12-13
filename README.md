@@ -9,7 +9,6 @@ A simple URL shortener built using Node.js, Express, and MongoDB.
 ## Setup
 1. Clone the repository: `git clone https://github.com/username/short-url-service.git`
 2. Install dependencies: `npm install`
-3. Start the server: `node app.js`
+3. Start the server: `npm start`
 
-## License
-MIT
+
