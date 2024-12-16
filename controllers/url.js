@@ -1,19 +1,20 @@
-const {nanoid} =require('shortid')
-
 const URL= require('../models/index');
 const shortid = require('shortid');
 
 async function handleGenerateShortUrl(req,res) {
     const body = req.body;
     if(!body.url) return res.status(400).json({error :'url is required'})
-    const shortID = shortid(8);
+    const shortID = shortid.generate(8);
     await URL.create({
         shortId : shortID,
         redirectUrl:body.url,
         visitHistory:[],
     });
+    // return res.json(
+    //     { id :shortID})
 
-    return res.json({ id :shortID})
+    return res.render("home",
+        { id :shortID})
 }
 
 async function handleRedirectToUrl(req,res) {
@@ -23,8 +24,14 @@ async function handleRedirectToUrl(req,res) {
     },{$push:{
         visitHistory: {
             timestamp: Date.now(),
-}}});
-    res.redirect(entry.redirectUrl);
+}}},
+    {new:true}
+
+);
+if(!entry){
+    return res.status(404).json({error:"Short url nor found"});
+}
+    return res.redirect(entry.redirectUrl);
     
 }
 
