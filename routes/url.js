@@ -1,6 +1,6 @@
 const express = require('express');
 
-const {handleGenerateShortUrl,handleRedirectToUrl} = require("../controllers/url")
+const {handleGenerateShortUrl,handleRedirectToUrl} = require("../controllers/url");
 
 const router = express.Router();
 

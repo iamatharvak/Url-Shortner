@@ -25,7 +25,7 @@ app.get("/test", async (req, res) => {
 });
 });
 
-app.use("/url", urlRoute);
+// app.use("/url", urlRoute);
 app.use("/",staticRoute);
 app.get("/:shortId", urlRoute);
 
