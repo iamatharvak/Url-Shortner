@@ -1,6 +1,8 @@
 const express = require("express");
 const path = require("path");
 const { connectToMongoDb } = require("./connect");
+const {restrictToLoggedinUserOnly,checkauth} =require('./middlewares/auth')
+const cookieParser = require('cookie-parser')
 const app = express();
 const Port = 8001;
 
@@ -16,6 +18,7 @@ connectToMongoDb("mongodb://localhost:27017/short-url")
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
@@ -28,9 +31,9 @@ app.get("/test", async (req, res) => {
   });
 });
 
-// app.use("/url", urlRoute);
-app.use("/", staticRoute);
-// app.use("/user", userRoute);
+app.use("/url", restrictToLoggedinUserOnly, urlRoute);
+app.use("/", checkauth,staticRoute);
+app.use("/user", userRoute);
 app.get("/:shortId", urlRoute);
 
 app.listen(Port, () => console.log(`Server Started at Port ${Port}`));
