@@ -15,7 +15,7 @@ connectToMongoDb("mongodb://localhost:27017/short-url")
   .catch(() => console.log("error in connection with MongoDb"));
 
 app.use(express.json());
-app.use(express.urlencoded({extended:false}))
+app.use(express.urlencoded({ extended: false }));
 
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
@@ -23,16 +23,14 @@ app.set("views", path.resolve("./views"));
 
 app.get("/test", async (req, res) => {
   const allUrls = await URL.find({});
-  return res.render("home",{
-        urls : allUrls,
-});
+  return res.render("home", {
+    urls: allUrls,
+  });
 });
 
 // app.use("/url", urlRoute);
-app.use("/",staticRoute);
-app.use("/user", userRoute);
+app.use("/", staticRoute);
+// app.use("/user", userRoute);
 app.get("/:shortId", urlRoute);
-
-
 
 app.listen(Port, () => console.log(`Server Started at Port ${Port}`));
