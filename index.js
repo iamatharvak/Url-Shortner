@@ -1,8 +1,8 @@
 const express = require("express");
 const path = require("path");
 const { connectToMongoDb } = require("./connect");
-const {restrictToLoggedinUserOnly,checkauth} =require('./middlewares/auth')
-const cookieParser = require('cookie-parser')
+const {restrictToLoggedinUserOnly,checkauth} =require('./middlewares/auth');
+const cookieParser = require('cookie-parser');
 const app = express();
 const Port = 8001;
 
