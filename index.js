@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const app = express();
 const Port = 8001;
 
-const URL = require("./models/index");
+// const URL = require("./models/index");
 
 const urlRoute = require("./routes/url");
 const staticRoute = require("./routes/staticRouter");
@@ -24,16 +24,16 @@ app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
 //ejs basically html files
 
-app.get("/test", async (req, res) => {
-  const allUrls = await URL.find({});
-  return res.render("home", {
-    urls: allUrls,
-  });
-});
+// app.get("/test", async (req, res) => {
+//   const allUrls = await URL.find({});
+//   return res.render("home", {
+//     urls: allUrls,
+//   });
+// });
 
 app.use("/url", restrictToLoggedinUserOnly, urlRoute);
 app.use("/", checkauth,staticRoute);
 app.use("/user", userRoute);
-app.get("/:shortId", urlRoute);
+// app.get("/:shortId", urlRoute);
 
 app.listen(Port, () => console.log(`Server Started at Port ${Port}`));

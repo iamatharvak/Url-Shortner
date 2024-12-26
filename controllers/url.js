@@ -15,7 +15,7 @@ async function handleGenerateShortUrl(req, res) {
   //     { id :shortID})
 
   return res.render("home", { id: shortID });
-}
+};
 
 async function handleRedirectToUrl(req, res) {
   const shortId = req.params.shortId;
@@ -36,7 +36,7 @@ async function handleRedirectToUrl(req, res) {
     return res.status(404).json({ error: "Short url nor found" });
   }
   return res.redirect(entry.redirectUrl);
-}
+};
 
 module.exports = {
   handleGenerateShortUrl,
